@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.chapter2.util.PropsUtil;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -190,5 +193,19 @@ public final class DatabaseHelper {
 
     private static String getTableName(Class<?> entityClass) {
         return entityClass.getSimpleName();
+    }
+
+    public static void executeSqlFile(String filePath) {
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(filePath);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        try {
+            String sql;
+            while ((sql = reader.readLine()) != null) {
+                executeUpdate(sql);
+            }
+        } catch (Exception e) {
+            LOGGER.error("execute sql file failure", e);
+            throw new RuntimeException(e);
+        }
     }
 }
