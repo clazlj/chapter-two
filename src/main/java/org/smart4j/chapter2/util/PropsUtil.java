@@ -56,4 +56,31 @@ public final class PropsUtil {
         }
         return value;
     }
+
+    /**
+     * 获取int型属性，默认值为0
+     */
+    public static int getInt(Properties props, String key) {
+        return getInt(props, key, 0);
+    }
+
+    public static int getInt(Properties props, String key, int defaultValue) {
+        int value = defaultValue;
+        if (props.containsKey(key)) {
+            value = CastUtil.castInt(props.getProperty(key));
+        }
+        return value;
+    }
+
+    public static boolean getBoolean(Properties props, String key) {
+        return getBoolean(props, key, false);
+    }
+
+    public static boolean getBoolean(Properties props, String key, Boolean defaultValue) {
+        boolean value = defaultValue;
+        if (props.containsKey(key)) {
+            value = CastUtil.castBoolean(props.getProperty(key));
+        }
+        return value;
+    }
 }
