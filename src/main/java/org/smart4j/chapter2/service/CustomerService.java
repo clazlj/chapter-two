@@ -14,7 +14,7 @@ public class CustomerService {
     /**
      * 获取客户列表
      */
-    public List<Customer> getCustomerList(String keyword) {
+    public List<Customer> getCustomerList() {
         //conn用ThreadLocal中存放的本地线程变量
         //Connection conn = DatabaseHelper.getConnection();
 
